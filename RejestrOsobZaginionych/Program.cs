@@ -1,4 +1,4 @@
-using RejestrOsobZaginionych.DAL.DbContext;
+using RejestrOsobZaginionych.DAL;
 using RejestrOsobZaginionych.Services.MissingPerson;
 
 var builder = WebApplication.CreateBuilder(args);

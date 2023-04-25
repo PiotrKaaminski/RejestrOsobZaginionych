@@ -1,4 +1,4 @@
-using RejestrOsobZaginionych.DAL.DbContext;
+using RejestrOsobZaginionych.DAL;
 using RejestrOsobZaginionych.Models.Common;
 using RejestrOsobZaginionych.Models.MissingPerson.List;
 

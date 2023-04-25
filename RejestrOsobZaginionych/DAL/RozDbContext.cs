@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using RejestrOsobZaginionych.DAL.Entities;
 
-namespace RejestrOsobZaginionych.DAL.DbContext;
+namespace RejestrOsobZaginionych.DAL;
 
 using Microsoft.EntityFrameworkCore;
 

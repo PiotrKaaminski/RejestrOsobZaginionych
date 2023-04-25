@@ -1,0 +1,39 @@
+﻿@using RejestrOsobZaginionych.Models.MissingPerson.List
+@using RejestrOsobZaginionych.Models.Common
+@{
+    ViewData["Title"] = "Home Page";
+    PaginatedResponse<MissingPersonListEntry> response = ViewBag.MissingPersonList;
+}
+
+<p>Page: @response.Page</p>
+<p>MaxPage: @response.MaxPage</p>
+
+@foreach (var missingPerson in response.Rows)
+{
+    var imageSrc = missingPerson.ImagePath ?? "resources/default_person_image.jpg";
+    <img src=@imageSrc alt="Person Image"/>
+    <p>FirstName: @missingPerson.FirstName</p>
+    <p>LastName: @missingPerson.LastName</p>
+    <p>Age: @missingPerson.Age</p>
+    <p>MissingSince: @missingPerson.MissingSince</p>
+    <p>Location: @missingPerson.Location</p>
+    <hr/>
+}
+
+@if (response.Page > 0)
+{
+    <a href="@Url.Action("Index", new { page = response.Page - 1 })">
+        <button class="btn btn-primary">
+            &laquo; Prev
+        </button>
+    </a>
+}
+
+@if (response.Page < response.MaxPage)
+{
+    <a href="@Url.Action("Index", new { page = response.Page + 1 })">
+        <button class="btn btn-primary">
+            Next &raquo;
+        </button>
+    </a>
+}

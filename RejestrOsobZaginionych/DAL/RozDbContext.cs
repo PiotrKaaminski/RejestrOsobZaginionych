@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using RejestrOsobZaginionych.DAL.Entities;
 
@@ -5,7 +7,7 @@ namespace RejestrOsobZaginionych.DAL;
 
 using Microsoft.EntityFrameworkCore;
 
-public class RozDbContext : DbContext
+public class RozDbContext : IdentityDbContext<IdentityUser>
 {
     protected readonly IConfiguration Configuration;
 

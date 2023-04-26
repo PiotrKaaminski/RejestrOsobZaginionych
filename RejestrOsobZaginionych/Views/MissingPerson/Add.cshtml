@@ -1,0 +1,52 @@
+﻿@using RejestrOsobZaginionych.Models.MissingPerson
+@using Microsoft.AspNetCore.Identity
+
+@model AddMissingPersonRequest
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Add Missing Person";
+}
+
+<h1>@ViewData["Title"]</h1>
+@using (Html.BeginForm("Add", "MissingPerson", FormMethod.Post))
+{
+    <p>
+        First name:<br/>
+        @Html.TextBoxFor(mp => mp.FirstName)
+    </p>
+    <br/>
+    <p>
+        Last name:<br/>
+        @Html.TextBoxFor(mp => mp.LastName)
+    </p>
+    <br/>
+    <p>
+        Age:<br/>
+        @Html.TextBoxFor(mp => mp.Age, new { @type = "number", onkeydown="return ValidateNumber(event);" })
+    </p>
+    <br/>
+    <p>
+        Missing since:<br/>
+        @Html.TextBoxFor(mp => mp.MissingSince, "{MM/dd/yyyy}", new { @class = "form-control date", type = "date"})
+    </p>
+    <br/>
+    <p>
+        Location:<br/>
+        @Html.TextBoxFor(mp => mp.Location)
+    </p>
+    <br/>
+    <input type="submit" class="btn btn-success" value="Add"/>
+    <a class="btn btn-danger" asp-controller="Home" asp-action="Index">Cancel</a>
+}
+
+<script type="text/javascript">
+    function ValidateNumber(e) {
+        var evt = (e) ? e : window.event;
+        var charCode = (evt.keyCode) ? evt.keyCode : evt.which;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;    
+    };
+</script>

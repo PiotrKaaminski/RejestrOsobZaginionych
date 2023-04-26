@@ -1,6 +1,6 @@
 using RejestrOsobZaginionych.DAL;
 using RejestrOsobZaginionych.Models.Common;
-using RejestrOsobZaginionych.Models.MissingPerson.List;
+using RejestrOsobZaginionych.Models.MissingPerson;
 
 namespace RejestrOsobZaginionych.Services.MissingPerson;
 

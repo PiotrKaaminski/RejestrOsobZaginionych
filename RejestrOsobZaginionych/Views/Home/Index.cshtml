@@ -1,8 +1,19 @@
-﻿@using RejestrOsobZaginionych.Models.MissingPerson.List
+﻿@using RejestrOsobZaginionych.Models.MissingPerson
 @using RejestrOsobZaginionych.Models.Common
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 @{
     ViewData["Title"] = "Home Page";
     PaginatedResponse<MissingPersonListEntry> response = ViewBag.MissingPersonList;
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    <a asp-controller="MissingPerson" asp-action="Add">
+        <button class="btn btn-primary">Add person</button>
+    </a>
 }
 
 <p>Page: @response.Page</p>
@@ -17,7 +28,7 @@
     <p>Age: @missingPerson.Age</p>
     <p>MissingSince: @missingPerson.MissingSince</p>
     <p>Location: @missingPerson.Location</p>
-    <hr/>
+    <hr>
 }
 
 @if (response.Page > 0)

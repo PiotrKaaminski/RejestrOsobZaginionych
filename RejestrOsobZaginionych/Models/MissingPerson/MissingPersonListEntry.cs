@@ -1,4 +1,4 @@
-namespace RejestrOsobZaginionych.Models.MissingPerson.List;
+namespace RejestrOsobZaginionych.Models.MissingPerson;
 
 using DAL.Entities;
 

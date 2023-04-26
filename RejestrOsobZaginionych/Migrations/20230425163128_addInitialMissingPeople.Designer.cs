@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RejestrOsobZaginionych.DAL;
@@ -11,9 +12,11 @@ using RejestrOsobZaginionych.DAL;
 namespace RejestrOsobZaginionych.Migrations
 {
     [DbContext(typeof(RozDbContext))]
-    partial class RozDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230425163128_addInitialMissingPeople")]
+    partial class addInitialMissingPeople
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

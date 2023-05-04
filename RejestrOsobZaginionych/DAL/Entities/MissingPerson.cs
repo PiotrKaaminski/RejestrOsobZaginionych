@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace RejestrOsobZaginionych.DAL.Entities;
 
 public class MissingPerson
@@ -9,4 +11,5 @@ public class MissingPerson
     public DateOnly MissingSince { get; set; }
     public string Location { get; set; }
     public string? ImagePath { get; set; }
+    public IdentityUser Creator { get; set; }
 }

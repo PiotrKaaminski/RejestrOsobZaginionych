@@ -21,6 +21,7 @@ builder.Services.AddScoped<RozDbContext>();
 // @@@ Web services @@@
 // Missing person services
 builder.Services.AddScoped<GetMissingPersonService>();
+builder.Services.AddScoped<AddMissingPersonService>();
 
 var app = builder.Build();
 

@@ -22,9 +22,9 @@ public class GetMissingPersonService
             .Take(pagination.PageSize)
             .ToList();
         var count = _dbContext.MissingPeople.Count();
-        var maxPage = Math.Ceiling((double)count / pagination.PageSize) - 1;
         var rows = missingPeople.ConvertAll(MissingPersonListEntry.FromEntity);
-        return new PaginatedResponse<MissingPersonListEntry>(rows, pagination.Page, (int) maxPage);
+        var hasMore = (pagination.PageSize * pagination.Page) + rows.Count < count;
+        return new PaginatedResponse<MissingPersonListEntry>(rows, pagination.Page, hasMore);
     }
     
 }

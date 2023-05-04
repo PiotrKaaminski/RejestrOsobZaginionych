@@ -23,13 +23,15 @@ public class RozDbContext : IdentityDbContext<IdentityUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<MissingPerson>().HasData(getInitialMissingPeople());
+        SeedInitialMissingPeople(builder);
+        SeedRoles(builder);
+        SeedAdmin(builder);
         base.OnModelCreating(builder);
     }
 
     public DbSet<MissingPerson> MissingPeople { get; set; }
 
-    private MissingPerson[] getInitialMissingPeople()
+    private void SeedInitialMissingPeople(ModelBuilder builder)
     {
         List<MissingPerson> initialMissingPeople = new List<MissingPerson>();
         var random = new Random();
@@ -50,7 +52,39 @@ public class RozDbContext : IdentityDbContext<IdentityUser>
                 ImagePath = null
             });
         }
+        
+        builder.Entity<MissingPerson>().HasData(initialMissingPeople);
+    }
 
-        return initialMissingPeople.ToArray();
+    private void SeedRoles(ModelBuilder builder)
+    {
+        builder.Entity<IdentityRole>().HasData
+        (
+            new IdentityRole() { Id = "cf1e50c9-74fb-4614-b547-ccbde7bd79ba", Name = "User", ConcurrencyStamp = "1", NormalizedName = "USER"},
+            new IdentityRole() { Id = "0c51cb7b-0460-4663-98b5-4f4a7e225cf5", Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "ADMIN"}
+        );
+    }
+    
+    private void SeedAdmin(ModelBuilder builder)
+    {
+        var hasher = new PasswordHasher<IdentityUser>();
+        builder.Entity<IdentityUser>().HasData
+        (
+            new IdentityUser()
+            {
+                Id = "9852271c-4681-4816-885d-69e36175b5d8",
+                UserName = "admin@abc.com",
+                NormalizedUserName = "ADMIN@ABC.COM",
+                PasswordHash = hasher.HashPassword(null, "admin")
+            }
+        );
+
+        builder.Entity<IdentityUserRole<string>>().HasData(
+            new IdentityUserRole<string>()
+            {
+                RoleId = "0c51cb7b-0460-4663-98b5-4f4a7e225cf5",
+                UserId = "9852271c-4681-4816-885d-69e36175b5d8"
+            }
+        );
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RejestrOsobZaginionych.DAL;
@@ -11,9 +12,11 @@ using RejestrOsobZaginionych.DAL;
 namespace RejestrOsobZaginionych.Migrations
 {
     [DbContext(typeof(RozDbContext))]
-    partial class RozDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230504113845_SeedRoles")]
+    partial class SeedRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,14 +53,14 @@ namespace RejestrOsobZaginionych.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cf1e50c9-74fb-4614-b547-ccbde7bd79ba",
+                            Id = "d2c088ff-55bf-4618-b463-3ece8da9e5b7",
                             ConcurrencyStamp = "1",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
-                            Id = "0c51cb7b-0460-4663-98b5-4f4a7e225cf5",
+                            Id = "05023c9f-cd49-4677-ab26-9f08fc707170",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
@@ -151,22 +154,6 @@ namespace RejestrOsobZaginionych.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "9852271c-4681-4816-885d-69e36175b5d8",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "658fe12b-2f05-4f3a-a328-158d398a9903",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "ADMIN@ABC.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOCMC+nhxHjaexJ9WOoND9Eiy5jR2CdAH3NU/oK/MMCjf7ENtKESvbKjqwMfBu2pmA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "98d83a0a-b106-435c-b5c7-5f6879eb4aeb",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@abc.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -229,13 +216,6 @@ namespace RejestrOsobZaginionych.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "9852271c-4681-4816-885d-69e36175b5d8",
-                            RoleId = "0c51cb7b-0460-4663-98b5-4f4a7e225cf5"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -294,47 +274,47 @@ namespace RejestrOsobZaginionych.Migrations
                         new
                         {
                             Id = 1,
-                            Age = 70,
+                            Age = 76,
                             FirstName = "firstName 0",
                             LastName = "lastName 0",
                             Location = "Warszawa",
-                            MissingSince = new DateOnly(2006, 8, 17)
+                            MissingSince = new DateOnly(2000, 5, 19)
                         },
                         new
                         {
                             Id = 2,
-                            Age = 47,
+                            Age = 59,
                             FirstName = "firstName 1",
                             LastName = "lastName 1",
                             Location = "Warszawa",
-                            MissingSince = new DateOnly(2005, 8, 23)
+                            MissingSince = new DateOnly(2007, 2, 13)
                         },
                         new
                         {
                             Id = 3,
-                            Age = 15,
+                            Age = 27,
                             FirstName = "firstName 2",
                             LastName = "lastName 2",
                             Location = "Warszawa",
-                            MissingSince = new DateOnly(2013, 8, 2)
+                            MissingSince = new DateOnly(2008, 5, 18)
                         },
                         new
                         {
                             Id = 4,
-                            Age = 63,
+                            Age = 41,
                             FirstName = "firstName 3",
                             LastName = "lastName 3",
                             Location = "Warszawa",
-                            MissingSince = new DateOnly(2017, 2, 4)
+                            MissingSince = new DateOnly(2019, 5, 22)
                         },
                         new
                         {
                             Id = 5,
-                            Age = 57,
+                            Age = 16,
                             FirstName = "firstName 4",
                             LastName = "lastName 4",
                             Location = "Warszawa",
-                            MissingSince = new DateOnly(2017, 5, 6)
+                            MissingSince = new DateOnly(2012, 2, 12)
                         },
                         new
                         {
@@ -343,43 +323,43 @@ namespace RejestrOsobZaginionych.Migrations
                             FirstName = "firstName 5",
                             LastName = "lastName 5",
                             Location = "Warszawa",
-                            MissingSince = new DateOnly(2013, 7, 21)
+                            MissingSince = new DateOnly(2012, 3, 2)
                         },
                         new
                         {
                             Id = 7,
-                            Age = 64,
+                            Age = 63,
                             FirstName = "firstName 6",
                             LastName = "lastName 6",
                             Location = "Warszawa",
-                            MissingSince = new DateOnly(2010, 8, 7)
+                            MissingSince = new DateOnly(2008, 1, 22)
                         },
                         new
                         {
                             Id = 8,
-                            Age = 46,
+                            Age = 77,
                             FirstName = "firstName 7",
                             LastName = "lastName 7",
                             Location = "Warszawa",
-                            MissingSince = new DateOnly(2005, 11, 1)
+                            MissingSince = new DateOnly(2012, 2, 23)
                         },
                         new
                         {
                             Id = 9,
-                            Age = 39,
+                            Age = 40,
                             FirstName = "firstName 8",
                             LastName = "lastName 8",
                             Location = "Warszawa",
-                            MissingSince = new DateOnly(2012, 7, 4)
+                            MissingSince = new DateOnly(2000, 8, 23)
                         },
                         new
                         {
                             Id = 10,
-                            Age = 44,
+                            Age = 37,
                             FirstName = "firstName 9",
                             LastName = "lastName 9",
                             Location = "Warszawa",
-                            MissingSince = new DateOnly(2014, 6, 16)
+                            MissingSince = new DateOnly(2000, 1, 7)
                         });
                 });
 

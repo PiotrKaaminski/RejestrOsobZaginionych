@@ -1,0 +1,100 @@
+﻿@using RejestrOsobZaginionych.Models.Common
+@using RejestrOsobZaginionych.Models.Users
+
+@{
+    ViewData["Title"] = "Users";
+    PaginatedResponse<UserListEntry> response = ViewBag.UserList;
+}
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Submitted missing people</th>
+        <th scope="col" class="m-auto">Actions</th>
+    </tr>
+    </thead>
+    @foreach (var user in response.Rows)
+    {
+        <tr>
+            <td>@user.UserName</td>
+            <td>@user.Role</td>
+            <td>@user.MissingPersonCount</td>
+            <td>
+                <button class="btn btn-danger" onclick="deleteUser('@user.Id')">Delete</button>
+                <button class="btn btn-warning" onclick="switchUserRole('@user.Id')">Change role</button>
+            </td>
+        </tr>
+    }
+</table>
+
+@if (response.Page > 0)
+{
+    <a href="@Url.Action("List", new { page = response.Page - 1 })">
+        <button class="btn btn-primary">
+            &laquo; Prev
+        </button>
+    </a>
+}
+
+@if (response.HasMore)
+{
+    <a href="@Url.Action("List", new { page = response.Page + 1 })">
+        <button class="btn btn-primary">
+            Next &raquo;
+        </button>
+    </a>
+}
+
+<script>
+function deleteUser(id) 
+{
+
+    $.ajax({
+        url: 'Delete',
+        type: 'DELETE',
+        dataType: 'json',
+        data: {
+            id: id
+        },
+        success: function(data) {
+            if (data.success) {
+                window.location.reload();
+            } else {
+                alert('fail');
+                window.location.reload();
+            }
+        },
+        error: function() {
+            alert('fail');
+            window.location.reload();
+        }
+    });
+}   
+
+function switchUserRole(id) 
+{
+
+    $.ajax({
+        url: 'SwitchRole',
+        type: 'PATCH',
+        dataType: 'json',
+        data: {
+            id: id
+        },
+        success: function(data) {
+            if (data.success) {
+                window.location.reload();
+            } else {
+                alert('fail');
+                window.location.reload();
+            }
+        },
+        error: function() {
+            alert('fail');
+            window.location.reload();
+        }
+    });
+} 
+</script>

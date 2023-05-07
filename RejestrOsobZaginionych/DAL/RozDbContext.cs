@@ -30,6 +30,7 @@ public class RozDbContext : IdentityDbContext<IdentityUser>
     }
 
     public DbSet<MissingPerson> MissingPeople { get; set; }
+    public DbSet<PersonImage> PersonImages { get; set; }
 
     private static void SetMissingPersonCreatorRelation(ModelBuilder builder)
     {
@@ -56,6 +57,8 @@ public class RozDbContext : IdentityDbContext<IdentityUser>
                 Id = "9852271c-4681-4816-885d-69e36175b5d8",
                 UserName = "admin@abc.com",
                 NormalizedUserName = "ADMIN@ABC.COM",
+                Email = "admin@abc.com",
+                NormalizedEmail = "ADMIN@ABC.COM",
                 PasswordHash = hasher.HashPassword(null, "admin")
             }
         );

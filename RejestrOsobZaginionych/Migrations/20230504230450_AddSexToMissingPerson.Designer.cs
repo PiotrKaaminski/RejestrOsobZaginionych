@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RejestrOsobZaginionych.DAL;
@@ -11,9 +12,11 @@ using RejestrOsobZaginionych.DAL;
 namespace RejestrOsobZaginionych.Migrations
 {
     [DbContext(typeof(RozDbContext))]
-    partial class RozDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230504230450_AddSexToMissingPerson")]
+    partial class AddSexToMissingPerson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,15 +160,13 @@ namespace RejestrOsobZaginionych.Migrations
                         {
                             Id = "9852271c-4681-4816-885d-69e36175b5d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "896f04fd-768e-4a52-9bcf-c8c720bbe17a",
-                            Email = "admin@abc.com",
+                            ConcurrencyStamp = "799bb33d-56ca-40f5-8937-988c3b231c80",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@ABC.COM",
                             NormalizedUserName = "ADMIN@ABC.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ59fiPtsa+jyQKsoeHHBJaGjebnLr3zU3KCH2DQOm7ZAbOggHJm+7ZnsHuZ+rMiWA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIsDu1ppobx8R+6H3+nSXJl68eTBlf0r16Wq9ym418qnFvtfyAf35ubtSQQBt6Plsw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7e52a72a-c934-432c-9b40-f18d4ab8e88c",
+                            SecurityStamp = "131fbefb-1bfb-4cdf-bfcb-1500916dc5be",
                             TwoFactorEnabled = false,
                             UserName = "admin@abc.com"
                         });
@@ -277,8 +278,8 @@ namespace RejestrOsobZaginionych.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("integer");
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("text");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -299,27 +300,6 @@ namespace RejestrOsobZaginionych.Migrations
                     b.HasIndex("CreatorId");
 
                     b.ToTable("MissingPeople");
-                });
-
-            modelBuilder.Entity("RejestrOsobZaginionych.DAL.Entities.PersonImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<byte[]>("File")
-                        .IsRequired()
-                        .HasColumnType("bytea");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PersonImages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

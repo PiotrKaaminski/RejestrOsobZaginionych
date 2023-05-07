@@ -2,6 +2,7 @@ using RejestrOsobZaginionych.DAL;
 using RejestrOsobZaginionych.Services.MissingPerson;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using RejestrOsobZaginionych.Services.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,12 @@ builder.Services.AddScoped<RozDbContext>();
 // Missing person services
 builder.Services.AddScoped<GetMissingPersonService>();
 builder.Services.AddScoped<AddMissingPersonService>();
+builder.Services.AddScoped<DeleteMissingPersonService>();
+
+// Users services
+builder.Services.AddScoped<GetUserListService>();
+builder.Services.AddScoped<DeleteUserService>();
+builder.Services.AddScoped<SwitchUserRoleService>();
 
 var app = builder.Build();
 

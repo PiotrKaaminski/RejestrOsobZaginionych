@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using RejestrOsobZaginionych.Models;
 using RejestrOsobZaginionych.Models.Common;
@@ -15,10 +16,16 @@ public class HomeController : Controller
         _getMissingPersonService = getMissingPersonService;
     }
 
-    public IActionResult Index(int page = 0)
+    public IActionResult Index(bool? male, int page = 0)
     {
-        ViewBag.MissingPersonList = _getMissingPersonService.GetMissingPersonList(new PaginationParameters(page, 5));
+        ViewBag.MissingPersonList = _getMissingPersonService.GetMissingPersonList(new PaginationParameters(page, 5), male);
         return View();
+    }
+
+    public ActionResult PersonImage(int id)
+    {
+        var image = _getMissingPersonService.GetPersonImage(id);
+        return File(image.File, image.Type);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

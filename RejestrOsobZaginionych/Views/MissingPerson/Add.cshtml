@@ -6,10 +6,15 @@
 
 @{
     ViewData["Title"] = "Add Missing Person";
+    var sexSelectListItems = new List<SelectListItem>
+    {
+        new("Male", "True", true),
+        new("Female", "False")
+    };
 }
 
 <h1>@ViewData["Title"]</h1>
-@using (Html.BeginForm("Add", "MissingPerson", FormMethod.Post))
+@using (Html.BeginForm("Add", "MissingPerson", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     <p>
         First name:<br/>
@@ -25,15 +30,23 @@
         Age:<br/>
         @Html.TextBoxFor(mp => mp.Age, new { @type = "number", onkeydown="return ValidateNumber(event);" })
     </p>
+    <p>
+        Sex:<br/>
+        @Html.DropDownListFor(mp => mp.Male, sexSelectListItems)
+    </p>
     <br/>
     <p>
         Missing since:<br/>
-        @Html.TextBoxFor(mp => mp.MissingSince, "{MM/dd/yyyy}", new { @class = "form-control date", type = "date"})
+        @Html.TextBoxFor(mp => mp.MissingSince, "{MM/dd/yyyy}", new { @class = "date", type = "date"})
     </p>
     <br/>
     <p>
         Location:<br/>
         @Html.TextBoxFor(mp => mp.Location)
+    </p>
+    <p>
+        Image:<br/>
+        <input type="file" name="Image" id="Image"/>
     </p>
     <br/>
     <input type="submit" class="btn btn-success" value="Add"/>

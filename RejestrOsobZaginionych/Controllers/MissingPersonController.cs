@@ -14,11 +14,17 @@ public class MissingPersonController : Controller
 
     private readonly UserManager<IdentityUser> _userManager;
     private readonly AddMissingPersonService _addMissingPersonService;
+    private readonly DeleteMissingPersonService _deleteMissingPersonService;
 
-    public MissingPersonController(UserManager<IdentityUser> userManager, AddMissingPersonService addMissingPersonService)
+    public MissingPersonController(
+        UserManager<IdentityUser> userManager, 
+        AddMissingPersonService addMissingPersonService,
+        DeleteMissingPersonService deleteMissingPersonService
+    )
     {
         _userManager = userManager;
         _addMissingPersonService = addMissingPersonService;
+        _deleteMissingPersonService = deleteMissingPersonService;
     }
 
     [Authorize]
@@ -33,10 +39,17 @@ public class MissingPersonController : Controller
     {
         var creatorId = _userManager.GetUserId(User);
         Debug.Assert(creatorId != null, nameof(creatorId) + " != null");
-        
-        _addMissingPersonService.AddMissingPerson(newMissingPerson, creatorId);
-        
+        var image = Request.Form.Files.GetFile("Image");
+        _addMissingPersonService.AddMissingPerson(newMissingPerson, creatorId, image);
         return RedirectToAction("Index", "Home");
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete]
+    public JsonResult Delete(int id)
+    {
+        var success = _deleteMissingPersonService.Delete(id);
+        return Json(new { success });
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
